@@ -1,0 +1,85 @@
+<section class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="handelRegisterForm()"  class=" bg-light my-3 w-100 p-4 ">
+    <h3 class="text-center fs-4 text-primary m-3">
+      sign up
+    </h3>
+    <h3 class="text-center fs-4 text-danger m-3">
+      {{message}}
+    </h3>
+    <div>
+      <div class="p-3">
+        <label class="text-black-50" for="firstName">First Name : </label>
+        <input formControlName ="first_name" type="text" class="form-control" >
+        <div class="text-danger" >
+          <p *ngIf="registerForm.get('first_name')?.getError('minlength')">
+            First name must be at least 3 characters long.
+          </p>
+          <p  *ngIf="registerForm.get('first_name')?.getError('required') && registerForm.get('first_name')?.touched">
+            First name is required.
+          </p>
+          <p *ngIf="registerForm.get('first_name')?.getError('maxlength')">
+            First name cannot exceed 20 characters.
+          </p>          
+        </div>
+      </div>
+      <div class="p-3">
+        <label class="text-black-50" for="lastName">Last Name : </label>
+        <input formControlName ="last_name" id="lastName" type="text" class="form-control" >
+        <div class="text-danger" >
+          <p *ngIf="registerForm.get('last_name')?.getError('minlength')">
+            Last name must be at least 3 characters long.
+          </p>
+          <p  *ngIf="registerForm.get('last_name')?.getError('required') && registerForm.get('last_name')?.touched">
+            Last name is required.
+          </p>
+          <p *ngIf="registerForm.get('last_name')?.getError('maxlength')">
+            Last name cannot exceed 20 characters.
+          </p>          
+        </div>
+      </div>
+      <div class="p-3">
+        <label class="text-black-50" for="Age">Age : </label>
+        <input formControlName ="age" id="Age" type="number" class="form-control" >
+        <div class="text-danger" >
+          <p  *ngIf="registerForm.get('age')?.getError('required') && registerForm.get('age')?.touched">
+            Age is required.
+          </p>
+          <p *ngIf="registerForm.get('age')?.getError('pattern')">
+            Age must be between 8 and 80 years.
+
+          </p>          
+        </div>
+      </div>
+      
+      <div class="p-3">
+        <label class="text-black-50" for="email">Email : </label>
+        <input formControlName ="email" id="email" type="email" class="form-control" >
+        <div class="text-danger" >
+          <p  *ngIf="registerForm.get('email')?.getError('required') && registerForm.get('email')?.touched">
+            Email is required.
+          </p>
+          <p *ngIf="registerForm.get('email')?.getError('email')">
+            Enter Valid Email
+          </p>          
+        </div>
+      </div>
+      <div class="p-3">
+        <label class="text-black-50" for="password">Password : </label>
+        <input formControlName ="password"  id="password" type="password" class="form-control" >
+        <div class="text-danger" >
+          <p  *ngIf="registerForm.get('password')?.getError('required') && registerForm.get('password')?.touched">
+            password is required.
+          </p>
+          <p *ngIf="registerForm.get('password')?.getError('pattern')">
+            Password requires uppercase, lowercase, and special characters.          </p>          
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <button [disabled] = "registerForm.invalid" type="submit" class="btn btn-primary text-light fs-5 m-3" >Register</button>
+
+        <a class="link-primary no-underline fs-6" routerLink="/login" role="button" > ALready have account !</a>
+      </div>
+    </div>
+  </form>
+</section>

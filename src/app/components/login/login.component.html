@@ -1,0 +1,41 @@
+<section class="container">
+  <form [formGroup]="loginForm"  (ngSubmit)="handelLogin()" class=" bg-light my-3 w-100 p-4 "  >
+    <h3 class="text-center fs-4 text-primary m-3">
+      Sign in 
+    </h3>
+    <h3 class="text-center fs-4 text-danger m-3">
+      {{resMsg}}
+    </h3>
+    <div>
+      <div class="p-3">
+        <label class="text-black-50" for="email">Email : </label>
+        <input formControlName="email" id="email" type="email" class="form-control">
+        <div class="text-danger" >
+          <p  *ngIf="loginForm.get('email')?.getError('required') && loginForm.get('email')?.touched">
+            Email is required.
+          </p>
+          <p *ngIf="loginForm.get('email')?.getError('email')">
+            Enter Valid Email
+          </p>          
+        </div>
+      </div>
+      
+      <div class="p-3">
+        <label class="text-black-50" for="password">Password : </label>
+        <input formControlName="password" id="password" type="password" class="form-control" >
+        <div class="text-danger" >
+          <p  *ngIf="loginForm.get('password')?.getError('required') && loginForm.get('password')?.touched">
+            password is required.
+          </p>
+          <p *ngIf="loginForm.get('password')?.getError('pattern')">
+            Password requires uppercase, lowercase, and special characters.          </p>          
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <button [disabled] = "loginForm.invalid" class="btn btn-primary text-light fs-5 m-3" >Login</button>
+
+      <a class="link-primary no-underline fs-6" routerLink="/register" role="button" > Create Account !</a>
+    </div>
+  </form>
+</section>
